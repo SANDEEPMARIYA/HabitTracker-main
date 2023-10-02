@@ -1,26 +1,12 @@
+const dotenv = require("dotenv");
 
-const { MongoClient, ServerApiVersion } = require('mongodb');
-const uri = "mongodb+srv://sandswet05:Sand@2002@cluster0.gwxxoel.mongodb.net/?retryWrites=true&w=majority";
+dotenv.config();
 
-// Create a MongoClient with a MongoClientOptions object to set the Stable API version
-const client = new MongoClient(uri, {
-  serverApi: {
-    version: ServerApiVersion.v1,
-    strict: true,
-    deprecationErrors: true,
-  }
-});
+const mongoose = require('mongoose');
 
-async function run() {
-  try {
-    // Connect the client to the server	(optional starting in v4.7)
-    await client.connect();
-    // Send a ping to confirm a successful connection
-    await client.db("admin").command({ ping: 1 });
-    console.log("Pinged your deployment. You successfully connected to MongoDB!");
-  } finally {
-    // Ensures that the client will close when you finish/error
-    await client.close();
-  }
+exports.connectMongoose =()=>{
+    mongoose.set("strictQuery", false);
+    mongoose.connect('mongodb+srv://himadrinayak:12345@cluster0.h7n86ah.mongodb.net/csv-upload?retryWrites=true&w=majority', { useNewUrlParser: true })
+    .then((e)=>console.log("Connected to Mongodb => Habit-Tracker"))
+    .catch((e)=>console.log("Not Connect Mongodb", e));
 }
-run().catch(console.dir);
