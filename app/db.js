@@ -1,12 +1,15 @@
-const dotenv = require("dotenv");
-
-dotenv.config();
-
 const mongoose = require('mongoose');
+const url = 'mongodb+srv://rahulsingh:Diwa@1998@cluster0.eqg5gsy.mongodb.net/?retryWrites=true&w=majority';
+// mongoose.connect('url') 
+mongoose.connect(url);
+const db=mongoose.connection;
 
-exports.connectMongoose =()=>{
-    mongoose.set("strictQuery", false);
-    mongoose.connect('mongodb+srv://sandswet05:Sand@2002@cluster0.gwxxoel.mongodb.net/?retryWrites=true&w=majority', { useNewUrlParser: true })
-    .then((e)=>console.log("Connected to Mongodb => admin"))
-    .catch((e)=>console.log("Not Connect Mongodb", e));
-}
+//If any Error then Getting this Line
+db.on('error',console.error.bind(console,"Error connecting to MongoDB"));   
+
+
+db.once('open',()=>{
+    console.log("Connected to Database :: MongoDB ")
+});
+
+module.exports=db;  //Exports db
