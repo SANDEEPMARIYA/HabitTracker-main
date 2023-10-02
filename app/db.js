@@ -1,15 +1,13 @@
 const mongoose = require('mongoose');
-const url = 'mongodb+srv://rahulsingh:Diwa@1998@cluster0.eqg5gsy.mongodb.net/?retryWrites=true&w=majority';
-// mongoose.connect('url') 
-mongoose.connect(url);
-const db=mongoose.connection;
 
-//If any Error then Getting this Line
-db.on('error',console.error.bind(console,"Error connecting to MongoDB"));   
+mongoose.connect(`mongodb+srv://sandswet05:Sand@2002@cluster0.gwxxoel.mongodb.net/?retryWrites=true&w=majority`);
 
+const db = mongoose.connection;
 
-db.once('open',()=>{
-    console.log("Connected to Database :: MongoDB ")
+db.on('error', console.error.bind(console, 'Error connecting to the db'));
+
+db.once('open', function () {
+  console.log("Successfully connected to the Database");
 });
 
-module.exports=db;  //Exports db
+module.exports = db;
